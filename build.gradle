@@ -1,0 +1,35 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'org.apache.commons'
+version = '1.7-SNAPSHOT'
+
+description = """Apache Commons CSV"""
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+configurations.all {
+}
+
+repositories {
+        
+     maven { url "https://repository.apache.org/snapshots" }
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    testCompile group: 'junit', name: 'junit', version:'4.12'
+    testCompile group: 'org.mockito', name: 'mockito-all', version:'1.10.19'
+    testCompile group: 'commons-io', name: 'commons-io', version:'2.6'
+    testCompile group: 'org.apache.commons', name: 'commons-lang3', version:'3.8.1'
+    testCompile group: 'com.h2database', name: 'h2', version:'1.4.196'
+}
+//packaging tests
+task packageTests(type: Jar) {
+  from sourceSets.test.output
+  classifier = 'tests'
+}
+artifacts.archives packageTests
