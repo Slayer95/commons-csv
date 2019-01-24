@@ -237,6 +237,14 @@ public final class CSVRecord implements Serializable, Iterable<String> {
     }
 
     /**
+     * Sets a value in this record.
+     *
+     */
+    public void set(int index, String value) {
+        values[index] = value;
+    }
+
+    /**
      * Converts the values to a List.
      *
      * TODO: Maybe make this public?
